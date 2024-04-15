@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>debelak_hw5</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="debelak_hw5_files/libs/clipboard/clipboard.min.js"></script>
+<script src="debelak_hw5_files/libs/quarto-html/quarto.js"></script>
+<script src="debelak_hw5_files/libs/quarto-html/popper.min.js"></script>
+<script src="debelak_hw5_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="debelak_hw5_files/libs/quarto-html/anchor.min.js"></script>
+<link href="debelak_hw5_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="debelak_hw5_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="debelak_hw5_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="debelak_hw5_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="debelak_hw5_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">debelak_hw5</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This report delves into an analysis of a comprehensive heart disease dataset that shows data from five significant sources: Cleveland, Hungarian, Switzerland, Long Beach VA, and Statlog (Heart).</p>
+<section id="study-overview" class="level3">
+<h3 class="anchored" data-anchor-id="study-overview"><strong>Study Overview</strong></h3>
+<p>The primary hypothesis driving this study says that the combined dataset will provide a more nuanced understanding of the risk factors and predictors for heart disease compared to individual datasets. Predictions based on this dataset include improved accuracy in the identification of at-risk populations and the potential to pinpoint subtler correlations between clinical measures and heart disease outcomes.</p>
+<p>Example sentences from the stimuli used in the data collection, which typically include patient intake forms and clinical assessment scripts, might read: “Please describe any symptoms of discomfort or pain you experience in your chest area,” or “Detail your family history concerning heart-related ailments.”</p>
+</section>
+<section id="data-dictionary" class="level3">
+<h3 class="anchored" data-anchor-id="data-dictionary"><strong>Data Dictionary</strong></h3>
+<ol type="1">
+<li><p><strong>Age</strong>: The age of the patient in years.</p></li>
+<li><p><strong>Sex</strong>: The biological sex of the patient (1 = male, 0 = female).</p></li>
+<li><p><strong>Chest Pain Type</strong>: Type of chest pain experienced (values ranging from 1 to 4, each representing a different type).</p></li>
+<li><p><strong>Resting BP</strong>: The resting blood pressure in mm Hg.</p></li>
+<li><p><strong>Cholesterol</strong>: Serum cholesterol in mg/dl.</p></li>
+<li><p><strong>Fasting Blood Sugar</strong>: Blood sugar levels after fasting (1 if fasting blood sugar &gt; 120 mg/dl, 0 otherwise).</p></li>
+<li><p><strong>Resting ECG</strong>: Results of resting electrocardiogram (0 = normal, 1 = having ST-T wave abnormality, 2 = showing probable or definite left ventricular hypertrophy).</p></li>
+<li><p><strong>Max Heart Rate</strong>: The maximum heart rate achieved.</p></li>
+<li><p><strong>Exercise Angina</strong>: Angina induced by exercise (1 = yes, 0 = no).</p></li>
+<li><p><strong>ST Depression</strong>: ST depression induced by exercise relative to rest.</p></li>
+<li><p><strong>Slope of ST</strong>: The slope of the peak exercise ST segment.</p></li>
+</ol>
+</section>
+<section id="participant-count" class="level3">
+<h3 class="anchored" data-anchor-id="participant-count"><strong>Participant Count</strong></h3>
+<p>The dataset comprises data for 1190 participants, providing a substantial sample size for robust statistical analysis.</p>
+</section>
+<section id="data-cleaning-and-processing" class="level3">
+<h3 class="anchored" data-anchor-id="data-cleaning-and-processing"><strong>Data Cleaning and Processing</strong></h3>
+<p>After applying the criteria outlined in the “data analysis” section, such as removing outliers based on physiological implausibilities (e.g., resting BP above 200 mm Hg) and incomplete records, the dataset was reduced to <strong>[insert number here after computation]</strong> entries. This cleanup ensures that the remaining data are of high quality and relevant for the hypotheses being tested.</p>
+</section>
+<section id="statistical-summary-of-age" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-summary-of-age"><strong>Statistical Summary of Age</strong></h3>
+<p>A summary of the participant ages, including mean, minimum, maximum, and standard deviation, is presented below:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th><strong>Statistic</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean Age</td>
+<td>XX</td>
+</tr>
+<tr class="even">
+<td>Minimum Age</td>
+<td>XX</td>
+</tr>
+<tr class="odd">
+<td>Maximum Age</td>
+<td>XX</td>
+</tr>
+<tr class="even">
+<td>Standard Deviation</td>
+<td>XX</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reproduction-of-key-figures" class="level3">
+<h3 class="anchored" data-anchor-id="reproduction-of-key-figures"><strong>Reproduction of Key Figures</strong></h3>
+<p>The recreation of Figure 1, which might illustrate the distribution of cholesterol levels across different age groups, will be included along with a comparative table showing the same data metrics.</p>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion"><strong>Conclusion</strong></h3>
+<p>This report provides a foundational analysis of a uniquely comprehensive dataset on heart disease, setting the stage for further research that could potentially revolutionize preventive strategies and treatment approaches in cardiology.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="st">"/Users/Apple/Library/CloudStorage/GoogleDrive-debelakj@umich.edu/My Drive/LING 343/Homework/Homework 5/Homework 5 Directory/heart_statlog_cleveland_hungary_final.csv"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the dataset</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>heart_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(data_path)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Overview of the dataset</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(heart_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      age             sex         chest.pain.type  resting.bp.s  
+ Min.   :28.00   Min.   :0.0000   Min.   :1.000   Min.   :  0.0  
+ 1st Qu.:47.00   1st Qu.:1.0000   1st Qu.:3.000   1st Qu.:120.0  
+ Median :54.00   Median :1.0000   Median :4.000   Median :130.0  
+ Mean   :53.72   Mean   :0.7639   Mean   :3.233   Mean   :132.2  
+ 3rd Qu.:60.00   3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:140.0  
+ Max.   :77.00   Max.   :1.0000   Max.   :4.000   Max.   :200.0  
+  cholesterol    fasting.blood.sugar  resting.ecg     max.heart.rate 
+ Min.   :  0.0   Min.   :0.0000      Min.   :0.0000   Min.   : 60.0  
+ 1st Qu.:188.0   1st Qu.:0.0000      1st Qu.:0.0000   1st Qu.:121.0  
+ Median :229.0   Median :0.0000      Median :0.0000   Median :140.5  
+ Mean   :210.4   Mean   :0.2134      Mean   :0.6983   Mean   :139.7  
+ 3rd Qu.:269.8   3rd Qu.:0.0000      3rd Qu.:2.0000   3rd Qu.:160.0  
+ Max.   :603.0   Max.   :1.0000      Max.   :2.0000   Max.   :202.0  
+ exercise.angina     oldpeak           ST.slope         target      
+ Min.   :0.0000   Min.   :-2.6000   Min.   :0.000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.: 0.0000   1st Qu.:1.000   1st Qu.:0.0000  
+ Median :0.0000   Median : 0.6000   Median :2.000   Median :1.0000  
+ Mean   :0.3874   Mean   : 0.9228   Mean   :1.624   Mean   :0.5286  
+ 3rd Qu.:1.0000   3rd Qu.: 1.6000   3rd Qu.:2.000   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   : 6.2000   Max.   :3.000   Max.   :1.0000  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(heart_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   1190 obs. of  12 variables:
+ $ age                : int  40 49 37 48 54 39 45 54 37 48 ...
+ $ sex                : int  1 0 1 0 1 1 0 1 1 0 ...
+ $ chest.pain.type    : int  2 3 2 4 3 3 2 2 4 2 ...
+ $ resting.bp.s       : int  140 160 130 138 150 120 130 110 140 120 ...
+ $ cholesterol        : int  289 180 283 214 195 339 237 208 207 284 ...
+ $ fasting.blood.sugar: int  0 0 0 0 0 0 0 0 0 0 ...
+ $ resting.ecg        : int  0 0 1 0 0 0 0 0 0 0 ...
+ $ max.heart.rate     : int  172 156 98 108 122 170 170 142 130 120 ...
+ $ exercise.angina    : int  0 0 0 1 0 0 0 0 1 0 ...
+ $ oldpeak            : num  0 1 0 1.5 0 0 0 0 1.5 0 ...
+ $ ST.slope           : int  1 2 1 2 1 1 1 1 2 1 ...
+ $ target             : int  0 1 0 1 0 0 0 0 1 0 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of participants</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Total number of participants:"</span>, <span class="fu">nrow</span>(heart_data), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total number of participants: 1190 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data cleaning as per the 'data analysis' section</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Removing implausible blood pressure readings</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cleaned_data <span class="ot">&lt;-</span> heart_data <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(resting.bp.s <span class="sc">&lt;</span> <span class="dv">200</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of rows after cleaning</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Number of rows after data cleaning:"</span>, <span class="fu">nrow</span>(cleaned_data), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of rows after data cleaning: 1185 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Descriptive statistics for age</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>age_stats <span class="ot">&lt;-</span> cleaned_data <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean_Age =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Min_Age =</span> <span class="fu">min</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Max_Age =</span> <span class="fu">max</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD_Age =</span> <span class="fu">sd</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Print age statistics table</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(age_stats, <span class="at">caption =</span> <span class="st">"Descriptive Statistics for Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Descriptive Statistics for Age</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Mean_Age</th>
+<th style="text-align: right;">Min_Age</th>
+<th style="text-align: right;">Max_Age</th>
+<th style="text-align: right;">SD_Age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">53.70127</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">9.370303</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reproduce Figure 1: Distribution of Cholesterol Levels</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cleaned_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> cholesterol)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Figure 1: Cholesterol Level by Age"</span>, <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Cholesterol"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="debelak_hw5_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Table equivalent to Figure 1</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>cholesterol_by_age <span class="ot">&lt;-</span> cleaned_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean_Cholesterol =</span> <span class="fu">mean</span>(cholesterol, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Min_Cholesterol =</span> <span class="fu">min</span>(cholesterol, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Max_Cholesterol =</span> <span class="fu">max</span>(cholesterol, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD_Cholesterol =</span> <span class="fu">sd</span>(cholesterol, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the table</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(cholesterol_by_age, <span class="at">caption =</span> <span class="st">"Cholesterol Levels by Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Cholesterol Levels by Age</caption>
+<colgroup>
+<col style="width: 5%">
+<col style="width: 25%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">age</th>
+<th style="text-align: right;">Mean_Cholesterol</th>
+<th style="text-align: right;">Min_Cholesterol</th>
+<th style="text-align: right;">Max_Cholesterol</th>
+<th style="text-align: right;">SD_Cholesterol</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">132.0000</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">228.5000</td>
+<td style="text-align: right;">204</td>
+<td style="text-align: right;">263</td>
+<td style="text-align: right;">29.44486</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">237.0000</td>
+<td style="text-align: right;">237</td>
+<td style="text-align: right;">237</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">244.5000</td>
+<td style="text-align: right;">219</td>
+<td style="text-align: right;">270</td>
+<td style="text-align: right;">36.06245</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">241.2000</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">529</td>
+<td style="text-align: right;">189.27414</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">272.0000</td>
+<td style="text-align: right;">246</td>
+<td style="text-align: right;">298</td>
+<td style="text-align: right;">36.76955</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">170.5556</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">220</td>
+<td style="text-align: right;">68.09756</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">202.5000</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">308</td>
+<td style="text-align: right;">77.07614</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">190.3333</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">340</td>
+<td style="text-align: right;">115.20880</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">233.5385</td>
+<td style="text-align: right;">173</td>
+<td style="text-align: right;">315</td>
+<td style="text-align: right;">38.30277</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">151.4706</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">297</td>
+<td style="text-align: right;">124.41318</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">240.3889</td>
+<td style="text-align: right;">147</td>
+<td style="text-align: right;">339</td>
+<td style="text-align: right;">54.38332</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">223.1875</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">466</td>
+<td style="text-align: right;">117.02206</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">219.5758</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">336</td>
+<td style="text-align: right;">72.70447</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">222.8462</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">358</td>
+<td style="text-align: right;">80.91660</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">214.9355</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">341</td>
+<td style="text-align: right;">96.31751</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">241.6552</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">491</td>
+<td style="text-align: right;">70.49431</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">233.7200</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">309</td>
+<td style="text-align: right;">65.02981</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">220.1290</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">311</td>
+<td style="text-align: right;">70.36748</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">202.3478</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">291</td>
+<td style="text-align: right;">98.19165</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">232.3684</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">355</td>
+<td style="text-align: right;">68.84115</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">216.0741</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">341</td>
+<td style="text-align: right;">64.84000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">205.2812</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">349</td>
+<td style="text-align: right;">90.65220</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">197.0213</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">339</td>
+<td style="text-align: right;">106.68391</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">207.4468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">404</td>
+<td style="text-align: right;">95.84267</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">190.6500</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">518</td>
+<td style="text-align: right;">128.83950</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">237.6667</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">603</td>
+<td style="text-align: right;">85.76862</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">226.7021</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">394</td>
+<td style="text-align: right;">101.51781</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">187.9556</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">409</td>
+<td style="text-align: right;">119.77099</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">211.3600</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">354</td>
+<td style="text-align: right;">101.96633</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">227.9483</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">458</td>
+<td style="text-align: right;">94.53347</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">194.2128</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">338</td>
+<td style="text-align: right;">105.28036</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">190.2500</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">318</td>
+<td style="text-align: right;">111.22450</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">183.4324</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">337</td>
+<td style="text-align: right;">127.60911</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">188.2391</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">394</td>
+<td style="text-align: right;">112.23828</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">180.2162</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">407</td>
+<td style="text-align: right;">129.65106</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">234.4667</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">335</td>
+<td style="text-align: right;">102.42364</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">227.2759</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">417</td>
+<td style="text-align: right;">119.58616</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">198.6842</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">302</td>
+<td style="text-align: right;">95.30014</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">269.2174</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">564</td>
+<td style="text-align: right;">127.95275</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">68</td>
+<td style="text-align: right;">180.5385</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">277</td>
+<td style="text-align: right;">108.58147</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">172.3750</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">289</td>
+<td style="text-align: right;">109.68371</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">201.0909</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">322</td>
+<td style="text-align: right;">111.68837</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">234.2500</td>
+<td style="text-align: right;">149</td>
+<td style="text-align: right;">302</td>
+<td style="text-align: right;">60.89511</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">137.0000</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">214</td>
+<td style="text-align: right;">100.61478</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">194.8750</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">310</td>
+<td style="text-align: right;">123.28879</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">246.0000</td>
+<td style="text-align: right;">203</td>
+<td style="text-align: right;">310</td>
+<td style="text-align: right;">56.50664</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">169.0000</td>
+<td style="text-align: right;">113</td>
+<td style="text-align: right;">197</td>
+<td style="text-align: right;">48.49742</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">259.6667</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">304</td>
+<td style="text-align: right;">76.78759</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
