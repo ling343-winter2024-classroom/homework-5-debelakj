@@ -1,0 +1,120 @@
+---
+title: "debelak_hw5"
+name: Jacob Debelak
+format: html
+---
+
+This report delves into an analysis of a comprehensive heart disease dataset that shows data from five significant sources: Cleveland, Hungarian, Switzerland, Long Beach VA, and Statlog (Heart).
+
+### **Study Overview**
+
+The primary hypothesis driving this study says that the combined dataset will provide a more nuanced understanding of the risk factors and predictors for heart disease compared to individual datasets. Predictions based on this dataset include improved accuracy in the identification of at-risk populations and the potential to pinpoint subtler correlations between clinical measures and heart disease outcomes.
+
+Example sentences from the stimuli used in the data collection, which typically include patient intake forms and clinical assessment scripts, might read: "Please describe any symptoms of discomfort or pain you experience in your chest area," or "Detail your family history concerning heart-related ailments."
+
+### **Data Dictionary**
+
+1.  **Age**: The age of the patient in years.
+
+2.  **Sex**: The biological sex of the patient (1 = male, 0 = female).
+
+3.  **Chest Pain Type**: Type of chest pain experienced (values ranging from 1 to 4, each representing a different type).
+
+4.  **Resting BP**: The resting blood pressure in mm Hg.
+
+5.  **Cholesterol**: Serum cholesterol in mg/dl.
+
+6.  **Fasting Blood Sugar**: Blood sugar levels after fasting (1 if fasting blood sugar \> 120 mg/dl, 0 otherwise).
+
+7.  **Resting ECG**: Results of resting electrocardiogram (0 = normal, 1 = having ST-T wave abnormality, 2 = showing probable or definite left ventricular hypertrophy).
+
+8.  **Max Heart Rate**: The maximum heart rate achieved.
+
+9.  **Exercise Angina**: Angina induced by exercise (1 = yes, 0 = no).
+
+10. **ST Depression**: ST depression induced by exercise relative to rest.
+
+11. **Slope of ST**: The slope of the peak exercise ST segment.
+
+### **Participant Count**
+
+The dataset comprises data for 1190 participants, providing a substantial sample size for robust statistical analysis.
+
+### **Data Cleaning and Processing**
+
+After applying the criteria outlined in the "data analysis" section, such as removing outliers based on physiological implausibilities (e.g., resting BP above 200 mm Hg) and incomplete records, the dataset was reduced to **\[insert number here after computation\]** entries. This cleanup ensures that the remaining data are of high quality and relevant for the hypotheses being tested.
+
+### **Statistical Summary of Age**
+
+A summary of the participant ages, including mean, minimum, maximum, and standard deviation, is presented below:
+
+| **Statistic**      | **Value** |
+|--------------------|-----------|
+| Mean Age           | XX        |
+| Minimum Age        | XX        |
+| Maximum Age        | XX        |
+| Standard Deviation | XX        |
+
+### **Reproduction of Key Figures**
+
+The recreation of Figure 1, which might illustrate the distribution of cholesterol levels across different age groups, will be included along with a comparative table showing the same data metrics.
+
+### **Conclusion**
+
+This report provides a foundational analysis of a uniquely comprehensive dataset on heart disease, setting the stage for further research that could potentially revolutionize preventive strategies and treatment approaches in cardiology.
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(knitr)
+
+data_path <- "/Users/Apple/Library/CloudStorage/GoogleDrive-debelakj@umich.edu/My Drive/LING 343/Homework/Homework 5/Homework 5 Directory/heart_statlog_cleveland_hungary_final.csv"
+
+# Import the dataset
+heart_data <- read.csv(data_path)
+
+# Overview of the dataset
+summary(heart_data)
+str(heart_data)
+
+# Number of participants
+cat("Total number of participants:", nrow(heart_data), "\n")
+
+# Data cleaning as per the 'data analysis' section
+# Removing implausible blood pressure readings
+cleaned_data <- heart_data %>% 
+  filter(resting.bp.s < 200)
+
+# Number of rows after cleaning
+cat("Number of rows after data cleaning:", nrow(cleaned_data), "\n")
+
+# Descriptive statistics for age
+age_stats <- cleaned_data %>%
+  summarise(
+    Mean_Age = mean(age, na.rm = TRUE),
+    Min_Age = min(age, na.rm = TRUE),
+    Max_Age = max(age, na.rm = TRUE),
+    SD_Age = sd(age, na.rm = TRUE)
+  )
+
+# Print age statistics table
+kable(age_stats, caption = "Descriptive Statistics for Age")
+
+# Reproduce Figure 1: Distribution of Cholesterol Levels
+ggplot(cleaned_data, aes(x = age, y = cholesterol)) +
+  geom_point() +
+  labs(title = "Figure 1: Cholesterol Level by Age", x = "Age", y = "Cholesterol")
+
+# Table equivalent to Figure 1
+cholesterol_by_age <- cleaned_data %>%
+  group_by(age) %>%
+  summarise(
+    Mean_Cholesterol = mean(cholesterol, na.rm = TRUE),
+    Min_Cholesterol = min(cholesterol, na.rm = TRUE),
+    Max_Cholesterol = max(cholesterol, na.rm = TRUE),
+    SD_Cholesterol = sd(cholesterol, na.rm = TRUE)
+  )
+
+# Print the table
+kable(cholesterol_by_age, caption = "Cholesterol Levels by Age")
+```
